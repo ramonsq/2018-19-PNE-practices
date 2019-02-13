@@ -7,7 +7,7 @@ class Seq:
         return len(self.strbases)
 
     def complement(self):
-        comp_bases = {"A": "T", "T": "A", "C": "G", "G": "T"}
+        comp_bases = {"A": "T", "T": "A", "C": "G", "G": "C"}
         translation = self.strbases.maketrans(comp_bases)
         strbases_comp = self.strbases.translate(translation)
         return Seq(strbases_comp)
