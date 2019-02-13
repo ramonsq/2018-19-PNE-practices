@@ -10,14 +10,14 @@ PORT = 8080
 IP = "212.128.253.64"
 
 # Connect to the server
-    s.connect((IP, PORT))
+s.connect((IP, PORT))
 
-    s.send(str.encode("MESSAGE FROM THE CLIENT"))
+s.send(str.encode("MESSAGE FROM THE CLIENT"))
 
-    msg = s.recv(2048).decode("utf-8")
-    print("MESSAGE FROM THE SERVER")
-    print(msg)
+msg = s.recv(2048).decode("utf-8")
+print("MESSAGE FROM THE SERVER")
+print(msg)
 
-    s.close()
+s.close()
 
-    print("The end")
+print("The end")
