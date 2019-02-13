@@ -7,7 +7,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print("Socket created")
 
 PORT = 8080
-IP = "212.128.253.64"
+IP = "212.128.253.114"
 
 while True:
     file = input("Type a message:")
