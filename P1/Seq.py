@@ -10,6 +10,7 @@ class Seq:
         comp_bases = {"A": "T", "T": "A", "C": "G", "G": "T"}
         translation = self.strbases.maketrans(comp_bases)
         strbases_comp = self.strbases.translate(translation)
+        return Seq(strbases_comp)
 
     def reverse(self):
         strbases_rev = self.strbases[::-1]
