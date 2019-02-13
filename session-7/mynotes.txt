@@ -1,0 +1,53 @@
+Here I am going to take my notes
+
+program C = client
+program S = server
+
+When the client sends a request to the server, the server responds to the client's request, this happens to every client
+trying to connect to the server. if there aren't any requests, nothing happens, if if there is a request and no server,
+the client would not get a response.
+
+The requests can be made from any electronic device (phone, computer, tablet...)
+
+To answer the requests there can be more than one servers running at the same time, at the same time that the client can
+connect to more than one server. You can have a client and a server in the same computer.
+
+Both, client and server, are connected through a network, internet.
+
+Inside the internet there are many isolated computers connected to each other inside different networks, and if we want
+to send a message from the client to the server we need an IP address, all computers connected to internet have a
+network interface and some of them more than one, each one correspond to a different IP so a computer can have more than
+one IP address, because they depend to the computer they are connected to.
+
+My phone IP address at URJC is: 10.3.52.107
+My phone IP address at home is:
+
+Are them the same?
+
+My computer lab IP is: 212.128.253.89
+teacher's: 212.128.253.64
+
+The Ping is the a command that says if your computer is alive.
+
+* ping time to 8.8.8.8:
+time = 3.56 ms
+
+* ping time to my computer:
+time = 0.064 ms
+
+* ping time to another computer in the same network:
+time = 0.058 ms
+
+* ping time to my phone:
+time = 64.8 ms
+
+* IP address from www.google.com: 216.58.211.228
+ping time = 3.75 ms
+
+* ping time to urjc.es:
+time = 2.30 ms
+
+We need the IP address to communicate to a server, but if there are more than one application to a server, we can
+identify each app with the port number. Usually the main app has the number port 80, but the other ones has the other
+numbers (e.x. 8080)
+THIS IS A TEXT EXAMPLE FOR ADDING TO MY FILE
