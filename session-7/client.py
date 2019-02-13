@@ -6,7 +6,7 @@ import socket
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print("Socket created")
 
-PORT = 8080
+PORT = 8082
 IP = "212.128.253.64"
 
 # Connect to the server
