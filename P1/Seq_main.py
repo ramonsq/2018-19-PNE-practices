@@ -6,19 +6,15 @@ s3 = s1.complement()
 s4 = s3.reverse()
 
 
-sequences = (s1, s2, s3, s4)
+sequences = [s1, s2, s3, s4]
 
 for elem in sequences:
-    print("Sequence:{}".numberofthesequence, elem.strbases)
+    print("Sequence:", elem.strbases)
     print("  Length:", elem.len())
-    bases = ["A", "C", "G", "T"]
+    bases = ["A", "T", "C", "G"]
 
     for i in bases:
-        print("Sequence:", )
+        print("  Bases count: {}".format(i, elem.count(i)))
+        print("  Bases {} percentage: {}".format(i, elem.perc(i)), "%")
 
-
-
-print("Sequence {}".format(key))
-print("  Length: {}".format(total_length))
-print("  Bases count: {}".format())
-print("  Percentage: {}".format(percentage))
+#("%s : s%" % (i, elem.count(i)))
