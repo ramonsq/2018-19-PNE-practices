@@ -22,8 +22,7 @@ sequence = [s0, s1, s2]
 # Connect to the server
 s.connect((IP, PORT))
 
-for i in sequence:
-    s.send(str.encode(i))
+s.send(str.encode(str(sequence)))
 
 msg = s.recv(2048).decode("utf-8")
 print("MESSAGE FROM THE SERVER")
