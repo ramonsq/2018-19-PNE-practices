@@ -14,7 +14,7 @@ for elem in sequences:
     bases = ["A", "T", "C", "G"]
 
     for i in bases:
-        print("  Bases count: {}".format(i, elem.count(i)))
+        print("  Bases count: {}, {}".format(i, elem.count(i)))
         print("  Bases {} percentage: {}".format(i, elem.perc(i)), "%")
 
 #("%s : s%" % (i, elem.count(i)))
