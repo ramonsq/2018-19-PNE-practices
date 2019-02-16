@@ -6,7 +6,7 @@ from Seq import Seq
 print("Socket created")
 
 PORT = 8080
-IP = "212.128.253.104"
+IP = "192.168.1.138"
 
 # Connect to the server
 
