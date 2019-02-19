@@ -3,7 +3,7 @@ import socket
 # SERVER IP, PORT
 
 PORT = 8080
-IP = "212.128.253.64"
+IP = "212.128.253.89"
 
 while True:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
