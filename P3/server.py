@@ -1,8 +1,8 @@
 import socket
 from Seq import Seq
 
-PORT = 5678
-IP = "191.168.0.139"
+PORT = 8097
+IP = "212.128.253.110"
 MAX_OPEN_REQUEST = 56710
 
 
@@ -37,18 +37,39 @@ def process_client(cs):
         elif x == "reverse":
             totalmsg += seqq.reverse().strbases
             totalmsg += "\n"
+        elif x == "countA":
+            totalmsg += str(seqq.count("A"))
+            totalmsg += "\n"
+        elif x == "countC":
+            totalmsg += str(seqq.count("C"))
+            totalmsg += "\n"
+        elif x == "countG":
+            totalmsg += str(seqq.count("G"))
+            totalmsg += "\n"
+        elif x == "countT":
+            totalmsg += str(seqq.count("T"))
+            totalmsg += "\n"
+        elif x == "percA":
+            totalmsg += str(seqq.perc("A"))
+            totalmsg += " %"
+            totalmsg += "\n"
+        elif x == "percC":
+            totalmsg += str(seqq.perc("C"))
+            totalmsg += " %"
+            totalmsg += "\n"
+        elif x == "percG":
+            totalmsg += str(seqq.perc("G"))
+            totalmsg += " %"
+            totalmsg += "\n"
+        elif x == "percT":
+            totalmsg += str(seqq.perc("T"))
+            totalmsg += " %"
+            totalmsg += "\n"
+        elif x == " ":
+            totalmsg += "ALIVE"
 
-        bases = ["A", "C", "G", "T"]
 
-        for x, i in bases:
-            if x == "count{}".format(i):
-                totalmsg += seqq.count(i)
-                totalmsg += "\n"
-            elif x == "count{}".format(i):
-                totalmsg += seqq.perc(i)
-                totalmsg += "\n"
-
-        # Sending the message back to the client
+# Sending the message back to the client
         # (because we are an echo server)
     cs.send(str.encode(totalmsg))
 

@@ -2,8 +2,8 @@ import socket
 
 # SERVER IP, PORT
 
-PORT = 5678
-IP = "191.168.0.139"
+PORT = 8097
+IP = "212.128.253.110"
 
 while True:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -11,6 +11,8 @@ while True:
     s.connect((IP, PORT))
 
     msg = input("> ")
+    if len(msg) == 0:
+        msg = " "
 
     # Send the request message to the server
     s.send(str.encode(msg))
