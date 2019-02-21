@@ -2,8 +2,8 @@ import socket
 
 # SERVER IP, PORT
 
-PORT = 45687
-IP = "212.128.253.113"
+PORT = 5678
+IP = "191.168.0.139"
 
 while True:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
