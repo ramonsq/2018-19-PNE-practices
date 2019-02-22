@@ -1,9 +1,11 @@
+# The message should be un upper cases
+
 import socket
 from Seq import Seq
 
-PORT = 8097
-IP = "212.128.253.110"
-MAX_OPEN_REQUEST = 56710
+PORT = 8092
+IP = "212.128.253.106"
+MAX_OPEN_REQUEST = 5671
 
 
 def process_client(cs):
@@ -16,7 +18,12 @@ def process_client(cs):
     valid_seq = "ACTG"
 
     counter = 0
-    for n in msg[0]:
+    if msg[0] == "asdf":
+        totalmsg += "ALIVE"
+        cs.send(str.encode(totalmsg))
+        return
+
+    for n in msg[0].upper():
         if n in valid_seq:
             counter += 1
     if counter == len(msg[0]):
@@ -24,9 +31,10 @@ def process_client(cs):
         totalmsg += "\n"
     elif counter != len(msg[0]):
         totalmsg += "Error"
+        cs.send(str.encode(totalmsg))
+        return
 
     for x in msg:
-
         print("Message from the client: {}".format(x))
         if x == "len":
             totalmsg += str(seqq.len())
@@ -65,8 +73,6 @@ def process_client(cs):
             totalmsg += str(seqq.perc("T"))
             totalmsg += " %"
             totalmsg += "\n"
-        elif x == " ":
-            totalmsg += "ALIVE"
 
 
 # Sending the message back to the client
