@@ -1,27 +1,32 @@
-# The message should be un upper cases
-
 import socket
 from Seq import Seq
 
-PORT = 7009
-IP = "212.128.253.108"
+PORT = 7005
+IP = "212.128.253.87"
 MAX_OPEN_REQUEST = 5671
 
 
 def process_client(cs):
 
     # Reading the message from the client
-    msg = cs.recv(2048).decode("utf-8").split()
+    msg = cs.recv(2048).decode("utf-8")
+    msg = msg.split('\n')
 
     seqq = Seq(msg[0])
     totalmsg = ""
     valid_seq = "ACTG"
 
+    for i in msg[1:]:
+        if i != "len" and i != "complement" and i != "reverse" and i != "countA" and i != "countC" and i != "countG" \
+                and i != "countT" and i != "percA" and i != "percC" and i != "percG" and i != "percT":
+            totalmsg += "Error"
+            cs.send(str.encode(totalmsg))
+            return
+
     if msg[0] == "asdf":
         totalmsg += "ALIVE"
         cs.send(str.encode(totalmsg))
         return
-
     counter = 0
     for n in msg[0].upper():
         if n in valid_seq:
@@ -72,10 +77,6 @@ def process_client(cs):
         elif x == "percT":
             totalmsg += str(seqq.perc("T"))
             totalmsg += " %"
-        elif x != ["len", "complement", "reverse", "countA", "countC", "countG", "countT", "percA", "percC", "percG", "percT"]:
-            totalmsg += "ERROR"
-            cs.send(str.encode(totalmsg))
-            return
 
 
 # Sending the message back to the client

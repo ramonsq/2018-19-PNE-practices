@@ -2,26 +2,26 @@ import socket
 
 # SERVER IP, PORT
 
-PORT = 7009
-IP = "212.128.253.108"
-
-while True:
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # establish the connection to the Server (IP, PORT)
-    s.connect((IP, PORT))
-
-    msg = input("> ")
-    if msg == "":
-        msg = "asdf"
+PORT = 7005
+IP = "212.128.253.87"
 
 
-    # Send the request message to the server
-    s.send(str.encode(msg))
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# establish the connection to the Server (IP, PORT)
+s.connect((IP, PORT))
 
-    # Receive the servers response
-    response = s.recv(2048).decode()
+msg = "ACTGATCAT\nlen\ncofghjmplement"
+if msg == "":
+    msg = "asdf"
 
-    # Print the server's response
-    print(response)
 
-    s.close()
+# Send the request message to the server
+s.send(str.encode(msg))
+
+# Receive the servers response
+response = s.recv(2048).decode()
+
+# Print the server's response
+print(response)
+
+s.close()
