@@ -2,7 +2,7 @@ import socket
 import termcolor
 
 # Change this IP to yours!!!!!
-IP = "212.128.253.89"
+IP = "127.0.0.1"
 PORT = 8081
 MAX_OPEN_REQUESTS = 5
 
@@ -12,25 +12,17 @@ def process_client(cs):
     Parameters:  cs: socket for communicating with the client"""
 
     # Read client message. Decode it as a string
-    msg = cs.recv(2048).decode("utf-8")
+    msg = input("Type here your request:"), cs.recv(2048).decode("utf-8")
 
     # Print the received message, for debugging
     print()
     print("Request message: ")
     termcolor.cprint(msg, 'green')
 
-    content = """<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Green Server</title>
-  </head>
-  <body style="background-color: lightpink;">
-    <h1>RAMON ES MUY GUAY</h1>
-    <p>hello bithces</p>
-  </body>
-</html>\r\n"""
-
+    filename1 = "index.html"
+    with open(filename1, "r") as file:
+        content = file.read()
+        file.close()
     status_line = "HTTP/1.1 200 ok\r\n"
 
     header = "Content-Type: text/html\r\n"
@@ -38,7 +30,49 @@ def process_client(cs):
 
     response_msg = status_line + header + "\r\n" + content
 
-    cs.send(str.encode(response_msg))
+    filename2 = "blue.html"
+    with open(filename2, "r") as file:
+        content3 = file.read()
+        file.close()
+    status_line = "HTTP/1.1 200 ok\r\n"
+
+    header = "Content-Type: text/html\r\n"
+    header += "Content-Length: {}\r\n".format(len(str.encode(content3)))
+
+    response_msg1 = status_line + header + "\r\n" + content3
+
+    filename3 = "pink.html"
+    with open(filename3, "r") as file:
+        content1 = file.read()
+        file.close()
+    status_line = "HTTP/1.1 200 ok\r\n"
+
+    header = "Content-Type: text/html\r\n"
+    header += "Content-Length: {}\r\n".format(len(str.encode(content1)))
+
+    response_msg2 = status_line + header + "\r\n" + content1
+
+    filename4 = "error.html"
+    with open(filename4, "r") as file:
+        content2 = file.read()
+        file.close()
+    status_line = "HTTP/1.1 200 ok\r\n"
+
+    header = "Content-Type: text/html\r\n"
+    header += "Content-Length: {}\r\n".format(len(str.encode(content2)))
+
+    response_msg3 = status_line + header + "\r\n" + content2
+
+    for i in msg:
+
+        if i == "/":
+            cs.send(str.encode(response_msg))
+        elif i == "/blue":
+            cs.send(str.encode(response_msg1))
+        elif i == "/pink":
+            cs.send(str.encode(response_msg2))
+        else:
+            cs.send(str.encode(response_msg3))
 
     # Close the socket
     cs.close()
