@@ -4,7 +4,7 @@ import termcolor
 # Change this IP to yours!!!!!
 IP = "127.0.0.1"
 PORT = 8081
-MAX_OPEN_REQUESTS = 5
+MAX_OPEN_REQUESTS = 57
 
 
 def process_client(cs):
