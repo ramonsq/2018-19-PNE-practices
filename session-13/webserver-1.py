@@ -6,7 +6,7 @@ PORT = 8000
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
-    def do_get(self):
+    def do_GET(self):
         print("GET received")
 
         print("Request line:" + self.requestline)
