@@ -2,8 +2,8 @@ import socket
 import termcolor
 
 # Change this IP to yours!!!!!
-IP = "127.0.0.1"
-PORT = 8081
+IP = "212.128.253.90"
+PORT = 8089
 MAX_OPEN_REQUESTS = 57
 
 
@@ -12,68 +12,49 @@ def process_client(cs):
     Parameters:  cs: socket for communicating with the client"""
 
     # Read client message. Decode it as a string
-    msg = input("Type here your request:"), cs.recv(2048).decode("utf-8")
+    msg = cs.recv(2048).decode("utf-8")
 
     # Print the received message, for debugging
-    print()
-    print("Request message: ")
-    termcolor.cprint(msg, 'green')
+    if msg != '':
+        print()
+        print("Request message: ")
+        termcolor.cprint(msg, 'green')
 
-    filename1 = "index.html"
-    with open(filename1, "r") as file:
-        content = file.read()
-        file.close()
-    status_line = "HTTP/1.1 200 ok\r\n"
+        request = msg.partition('\n')[0].split(' ')[1]
 
-    header = "Content-Type: text/html\r\n"
-    header += "Content-Length: {}\r\n".format(len(str.encode(content)))
-
-    response_msg = status_line + header + "\r\n" + content
-
-    filename2 = "blue.html"
-    with open(filename2, "r") as file:
-        content3 = file.read()
-        file.close()
-    status_line = "HTTP/1.1 200 ok\r\n"
-
-    header = "Content-Type: text/html\r\n"
-    header += "Content-Length: {}\r\n".format(len(str.encode(content3)))
-
-    response_msg1 = status_line + header + "\r\n" + content3
-
-    filename3 = "pink.html"
-    with open(filename3, "r") as file:
-        content1 = file.read()
-        file.close()
-    status_line = "HTTP/1.1 200 ok\r\n"
-
-    header = "Content-Type: text/html\r\n"
-    header += "Content-Length: {}\r\n".format(len(str.encode(content1)))
-
-    response_msg2 = status_line + header + "\r\n" + content1
-
-    filename4 = "error.html"
-    with open(filename4, "r") as file:
-        content2 = file.read()
-        file.close()
-    status_line = "HTTP/1.1 200 ok\r\n"
-
-    header = "Content-Type: text/html\r\n"
-    header += "Content-Length: {}\r\n".format(len(str.encode(content2)))
-
-    response_msg3 = status_line + header + "\r\n" + content2
-
-    for i in msg:
-
-        if i == "/":
-            cs.send(str.encode(response_msg))
-        elif i == "/blue":
-            cs.send(str.encode(response_msg1))
-        elif i == "/pink":
-            cs.send(str.encode(response_msg2))
+        content = ''
+        if request == '/':
+            with open('index.html', 'r') as file:
+                for line in file:
+                    content += line
+                    content = str(content)
+        elif request == '/blue':
+            with open('blue.html', 'r') as file:
+                for line in file:
+                    content += line
+                    content = str(content)
+        elif request == '/pink':
+            with open('pink.html', 'r') as file:
+                for line in file:
+                    content += line
+                    content = str(content)
         else:
-            cs.send(str.encode(response_msg3))
+            with open('error.html', 'r') as file:
+                for line in file:
+                    content += line
+                    content = str(content)
 
+        status_line = "HTTP/1.1 200 ok\r\n"
+
+        header = "Content-Type: text/html\r\n"
+        header += "Content-Length: {}\r\n".format(len(str.encode(content)))
+
+        response_msg = status_line + header + "\r\n" + content
+
+        cs.send(str.encode(response_msg))
+
+    else:
+        print("Your request is empty ):")
     # Close the socket
     cs.close()
 
