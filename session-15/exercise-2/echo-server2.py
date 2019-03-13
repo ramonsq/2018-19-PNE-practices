@@ -2,7 +2,7 @@ import http.server
 import socketserver
 import termcolor
 
-PORT = 8000
+PORT = 8009
 
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
@@ -24,10 +24,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             with open("error.html", "r") as f:
                 contents = f.read()
         if i != -1:
-            msg = path[i + 1:]
+            if path.find("&") != -1:
+                ii = path.find("&")
+                msg = path[i + 1: ii]
+                msg = msg.replace("+", " ")
+                msg = msg.upper()
+            else:
+                msg = path[i + 1:]
             with open('response.html', 'r') as f:
                 contents = f.read()
             contents = contents.replace('msg', msg)
+
 
         self.send_response(200)
 
