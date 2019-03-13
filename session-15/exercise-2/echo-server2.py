@@ -14,7 +14,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         path = self.path
         i = path.find('=')
 
-        if self.path == '/':
+        if self.path == '/' or self.path == "echo":
             with open("capital.html", "r") as f:
                 contents = f.read()
             print('Path: ' + self.path)
