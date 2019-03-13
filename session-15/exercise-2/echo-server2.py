@@ -15,7 +15,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         i = path.find('=')
 
         if self.path == '/':
-            with open("form.html", "r") as f:
+            with open("capital.html", "r") as f:
                 contents = f.read()
             print('Path: ' + self.path)
             path = self.path
@@ -28,7 +28,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             with open('response.html', 'r') as f:
                 contents = f.read()
             contents = contents.replace('msg', msg)
-
 
         self.send_response(200)
 
