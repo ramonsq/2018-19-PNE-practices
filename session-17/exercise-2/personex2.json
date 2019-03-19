@@ -1,0 +1,27 @@
+[{
+  "Firstname": "Ramón",
+  "Lastname": "Sánchez Quijada",
+  "age": 18,
+  "phoneNumber": [
+    {"number": "1234-1234", "type": "home"},
+    {"number": "5678-5678", "type": "mobile"}
+  ]
+},
+ {
+  "Firstname": "Sax",
+  "Lastname": "Guy",
+  "age": 40,
+  "phoneNumber": [
+    {"number": "9999-564", "type": "home"}
+      ]
+ },
+ {
+  "Firstname": "Ricky",
+  "Lastname": "Rickroll",
+  "age": 60,
+  "phoneNumber": [
+    {"number": "6766534", "type": "Dance floor"},
+    {"number": "333", "type": "mobile"},
+    {"number": "88778", "type": "fornite"}
+  ]
+ }]

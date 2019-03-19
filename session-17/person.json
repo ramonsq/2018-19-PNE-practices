@@ -1,0 +1,9 @@
+{
+  "Firstname": "Ramón",
+  "Lastname": "Sánchez Quijada",
+  "age": 18,
+  "phoneNumber": [
+    {"number": "1234-1234", "type": "home"},
+    {"number": "5678-5678", "type": "mobile"}
+  ]
+}
