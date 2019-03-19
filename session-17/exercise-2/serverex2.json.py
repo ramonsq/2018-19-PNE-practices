@@ -3,7 +3,7 @@ import socketserver
 import termcolor
 
 # Define the Server's port
-PORT = 8002
+PORT = 8008
 
 
 # Class with our Handler. It is a called derived from BaseHTTPRequestHandler
@@ -30,7 +30,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             content_type = 'text/html'
 
         elif resource == "/listusers":
-            f = open("person.json", 'r')
+            f = open("personex2.json", 'r')
             code = 200
             # Read the file
             contents = f.read()

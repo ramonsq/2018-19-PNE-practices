@@ -5,7 +5,7 @@ import http.client
 import json
 import termcolor
 
-PORT = 8002
+PORT = 8008
 SERVER = 'localhost'
 
 print("\nConnecting to server: {}:{}\n".format(SERVER, PORT))
@@ -41,6 +41,7 @@ for person in people:
 
     termcolor.cprint("Age: ", 'green', end="")
     print(person['age'])
+
 
     # Get the phoneNumber list
     phoneNumbers = person['phoneNumber']
