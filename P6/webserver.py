@@ -3,33 +3,36 @@ import socketserver
 import termcolor
 from Seq import Seq
 
-PORT = 8009
+PORT = 8000
 
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
+
         # -- printing the request line
+        global l, bases_operations
         termcolor.cprint(self.requestline, 'green')
-        print('Path: ' + self.path)
         path = self.path
 
         if self.path == '/':
             with open("main.html", "r") as f:
                 contents = f.read()
-            print('Path: ' + self.path)
             resp = 200
-            path = self.path
-        elif path[:4] == '/myserver':
-            msg =path.split('&')
+        elif path[:4] == '/get':
+            resp = 200
+            msg = path.split('&')
             my_seq = msg[0].split('=')[1]
-            resp = 200
             if my_seq.upper().strip('ACGT') == '':
                 my_seq = Seq(my_seq)
 
                 # i create new dics for the options
-                count = {'base=A': ('Count A: ' + my_seq.count('A')), 'base=C': ('Count C: ' + my_seq.count('C')), 'base=G': ('Count G: ' + my_seq.count('G')), 'base=T': ('Count T: ' + my_seq.count('T'))}
-                perc = {'base=A': ('Percentage of A: ' + my_seq.perc('A') + '%'), 'base=C': ('Percentage of C: ' + my_seq.perc('C') + '%'), 'base=T': ('Percentage of T: ' + my_seq.perc('T') + '%'), 'base=G': ('Percentage of G: ' + my_seq.perc('G') + '%')}
+                count = {'base=A': ('Count A: ' + my_seq.count('A')), 'base=C': ('Count C: ' + my_seq.count('C')),
+                         'base=G': ('Count G: ' + my_seq.count('G')), 'base=T': ('Count T: ' + my_seq.count('T'))}
+                perc = {'base=A': ('Percentage A: ' + my_seq.perc('A') + '%'),
+                        'base=C': ('Percentage C: ' + my_seq.perc('C') + '%'),
+                        'base=T': ('Percentage T: ' + my_seq.perc('T') + '%'),
+                        'base=G': ('Percentage G: ' + my_seq.perc('G') + '%')}
 
                 # now, i create another dic to place both previous dics
                 pos_ops = {'count': count, 'perc': perc}
@@ -42,26 +45,39 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     bases = msg[2]
                     # i try to find things inside the dics with the function key, that introduces inside the dics
                     if bases in pos_ops[operation].keys():
-                        bases_operation = pos_ops[operation][bases]
+                        bases_operations = pos_ops[operation][bases]
 
-                elif len(msg) == 4: # that means that i actually wrote a message
+                elif len(msg) == 4:  # that means that i actually wrote a message
                     l = 'Length: ' + str(my_seq.len())
                     operation = msg[2].split('=')[1]
                     bases = msg[3]
                     if bases in pos_ops[operation].keys():
                         bases_operations = pos_ops[operation][bases]
-                    contents = contents.replace('msg', msg)
-                else:
-                    with open ('seqerror.html', 'r') as f:
-                        contents = f.read()
 
+                fs = open('response.html', 'w')
+                data = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RESPONSE</title>
+</head>
+<body style="background-color: yellow;">
+    <h1>RESULTS:</h1>
+    <p>msg</p>
+    <a href="/">[Main Page]</a>
+
+</body>
+</html>""".format(my_seq.strbases.upper(), l, bases_operations)
+                fs.write(data)
+                with open('response.html', 'r') as f:
+                    contents = f.read()
+            else:
+                with open('seqerror.html', 'r') as f:
+                    contents = f.read()
         else:
             resp = 404
             with open("error.html", "r") as f:
                 contents = f.read()
-
-
-
 
         self.send_response(resp)
         self.send_header('Content-Type', 'text/html')
