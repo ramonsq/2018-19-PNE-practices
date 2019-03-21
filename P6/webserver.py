@@ -3,7 +3,7 @@ import socketserver
 import termcolor
 from Seq import Seq
 
-PORT = 8000
+PORT = 8109
 
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
@@ -27,17 +27,18 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 my_seq = Seq(my_seq)
 
                 # i create new dics for the options
-                count = {'base=A': ('Count A: ' + my_seq.count('A')), 'base=C': ('Count C: ' + my_seq.count('C')),
-                         'base=G': ('Count G: ' + my_seq.count('G')), 'base=T': ('Count T: ' + my_seq.count('T'))}
-                perc = {'base=A': ('Percentage A: ' + my_seq.perc('A') + '%'),
-                        'base=C': ('Percentage C: ' + my_seq.perc('C') + '%'),
-                        'base=T': ('Percentage T: ' + my_seq.perc('T') + '%'),
-                        'base=G': ('Percentage G: ' + my_seq.perc('G') + '%')}
+                count = {'base=A': ('Count A: ' + str(my_seq.count('A'))), 'base=C': ('Count C: ' + str(my_seq.count('C'))),
+                         'base=G': ('Count G: ' + str(my_seq.count('G'))), 'base=T': ('Count T: ' + str(my_seq.count('T')))}
+                perc = {'base=A': ('Percentage A: ' + str(my_seq.perc('A')) + '%'),
+                        'base=C': ('Percentage C: ' + str(my_seq.perc('C')) + '%'),
+                        'base=T': ('Percentage T: ' + str(my_seq.perc('T')) + '%'),
+                        'base=G': ('Percentage G: ' + str(my_seq.perc('G')) + '%')}
 
                 # now, i create another dic to place both previous dics
                 pos_ops = {'count': count, 'perc': perc}
 
                 # when you write no message you get a len of 3, so you have to star from there
+
                 if len(msg) == 3:
                     # now a create an empty list with the length, so when i don choose it i get no answer from it
                     l = ''
@@ -49,8 +50,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                 elif len(msg) == 4:  # that means that i actually wrote a message
                     l = 'Length: ' + str(my_seq.len())
-                    operation = msg[2].split('=')[1]
-                    bases = msg[3]
+                    operation = msg[3].split('=')[1]
+                    bases = msg[2]
+                    print(bases, operation)
                     if bases in pos_ops[operation].keys():
                         bases_operations = pos_ops[operation][bases]
 
