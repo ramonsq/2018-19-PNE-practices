@@ -3,8 +3,7 @@ import socketserver
 import termcolor
 from Seq import Seq
 
-PORT = 8109
-
+PORT = 8000
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
@@ -51,10 +50,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 elif len(msg) == 4:  # that means that i actually wrote a message
                     l = 'Length: ' + str(my_seq.len())
                     operation = msg[3].split('=')[1]
-                    bases = msg[2]
+                    bases = msg[2].split('=')[1]
                     print(bases, operation)
                     if bases in pos_ops[operation].keys():
-                        bases_operations = pos_ops[operation][bases]
+                        bases_operations = pos_ops[bases][operation]
 
                 fs = open('response.html', 'w')
                 data = """<!DOCTYPE html>

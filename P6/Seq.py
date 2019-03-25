@@ -24,7 +24,7 @@ class Seq:
         total_length = len(self.strbases)
         if total_length > 0:
             nbase = self.count(base)
-            perc = str(round(100.0 * nbase / total_length, 1))
+            perc = str(round(100.0 * int(nbase) / total_length, 1))
         else:
             perc = 0
 
