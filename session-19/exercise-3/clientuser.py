@@ -41,7 +41,7 @@ for i in user1:
     counter += 1
 
 conn = http.client.HTTPSConnection(HOSTNAME)
-conn.request(METHOD, ENDPOINT + GITHUB_ID + "/repos/{}/2018-19-PNE-practices/commits".format(GITHUB_ID), None, headers)
+conn.request(METHOD, "/repos/{}/2018-19-PNE-practices/commits".format(GITHUB_ID), None, headers)
 
 r1 = conn.getresponse()
 text_json = r1.read().decode("utf-8")
