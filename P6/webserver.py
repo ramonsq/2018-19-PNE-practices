@@ -5,12 +5,13 @@ from Seq import Seq
 
 PORT = 8000
 
+
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
 
         # -- printing the request line
-        global l, bases_operations
+        global le, bases_operations
         termcolor.cprint(self.requestline, 'green')
         path = self.path
 
@@ -26,8 +27,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 my_seq = Seq(my_seq)
 
                 # i create new dics for the options
-                count = {'base=A': ('Count A: ' + str(my_seq.count('A'))), 'base=C': ('Count C: ' + str(my_seq.count('C'))),
-                         'base=G': ('Count G: ' + str(my_seq.count('G'))), 'base=T': ('Count T: ' + str(my_seq.count('T')))}
+                count = {'base=A': ('Count A: ' + str(my_seq.count('A'))),
+                         'base=C': ('Count C: ' + str(my_seq.count('C'))),
+                         'base=G': ('Count G: ' + str(my_seq.count('G'))),
+                         'base=T': ('Count T: ' + str(my_seq.count('T')))}
                 perc = {'base=A': ('Percentage A: ' + str(my_seq.perc('A')) + '%'),
                         'base=C': ('Percentage C: ' + str(my_seq.perc('C')) + '%'),
                         'base=T': ('Percentage T: ' + str(my_seq.perc('T')) + '%'),
@@ -40,20 +43,19 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
                 if len(msg) == 3:
                     # now a create an empty list with the length, so when i don choose it i get no answer from it
-                    l = ''
+                    le = ''
                     operation = msg[1].split('=')[1]
                     bases = msg[2]
                     # i try to find things inside the dics with the function key, that introduces inside the dics
-                    if bases in pos_ops[operation].keys():
-                        bases_operations = pos_ops[operation][bases]
+                    if bases in pos_ops[operation]["base=" + bases]:
+                        bases_operations = pos_ops[operation]["base=" + bases]
 
                 elif len(msg) == 4:  # that means that i actually wrote a message
-                    l = 'Length: ' + str(my_seq.len())
+                    le = 'Length: ' + str(my_seq.len())
                     operation = msg[3].split('=')[1]
                     bases = msg[2].split('=')[1]
-                    print(bases, operation)
-                    if bases in pos_ops[operation].keys():
-                        bases_operations = pos_ops[bases][operation]
+                    if bases in pos_ops[operation]["base=" + bases]:
+                        bases_operations = pos_ops[operation]["base=" + bases]
 
                 fs = open('response.html', 'w')
                 data = """<!DOCTYPE html>
@@ -68,7 +70,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
     <a href="/">[Main Page]</a>
 
 </body>
-</html>""".format(my_seq.strbases.upper(), l, bases_operations)
+</html>""".format(my_seq.strbases.upper(), le, bases_operations)
                 fs.write(data)
                 with open('response.html', 'r') as f:
                     contents = f.read()

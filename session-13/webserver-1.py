@@ -3,7 +3,6 @@ import socketserver
 
 PORT = 8000
 
-
 class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
@@ -13,7 +12,31 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         print("  Cmd: " + self.command)
         print("  Path: " + self.path)
 
-        content = "I am the happy server! :-)"
+        paths = ['/', '/blue', '/pink']
+        content = ''
+        path = self.path
+
+        if path in paths:
+            if self.path == '/':
+                with open('index.html', 'r') as file:
+                    for line in file:
+                        content += line
+                        content = str(content)
+            elif self.path == '/blue':
+                with open('blue.html', 'r') as file:
+                    for line in file:
+                        content += line
+                        content = str(content)
+            elif self.path == '/pink':
+                with open('pink.html', 'r') as file:
+                    for line in file:
+                        content += line
+                        content = str(content)
+        else:
+            with open('error.html', 'r') as file:
+                for line in file:
+                    content += line
+                    content = str(content)
 
         self.send_response(200)
         self.send_header('Content-Type', 'text/html')
