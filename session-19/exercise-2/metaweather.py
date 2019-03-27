@@ -4,7 +4,7 @@
 import http.client
 import json
 
-def get_woeid(capital):
+def woeid(capital):
     try:
         # -- API information
         HOSTNAME = "www.metaweather.com"
@@ -42,10 +42,10 @@ def get_woeid(capital):
 HOSTNAME = "www.metaweather.com"
 ENDPOINT = "/api/location/"
 capital = input("Introduce a valid capital: ")
-if not (get_woeid(capital)):
+if not (woeid(capital)):
     print("Could not find that capital, please try again...")
 else:
-    LOCATION_WOEID = str(get_woeid(capital))
+    LOCATION_WOEID = str(woeid(capital))
     METHOD = "GET"
 
     # -- Here we can define special headers if needed
