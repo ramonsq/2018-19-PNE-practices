@@ -3,7 +3,7 @@ import socketserver
 import termcolor
 from Seq import Seq
 
-PORT = 8000
+PORT = 8002
 
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
@@ -14,6 +14,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         global le, bases_operations
         termcolor.cprint(self.requestline, 'green')
         path = self.path
+
 
         if self.path == '/':
             with open("main.html", "r") as f:
@@ -44,18 +45,18 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 if len(msg) == 3:
                     # now a create an empty list with the length, so when i don choose it i get no answer from it
                     le = ''
-                    operation = msg[1].split('=')[1]
-                    bases = msg[2]
+                    operation = msg[2].split('=')[1]
+                    bases = msg[1]
                     # i try to find things inside the dics with the function key, that introduces inside the dics
-                    if bases in pos_ops[operation]["base=" + bases]:
-                        bases_operations = pos_ops[operation]["base=" + bases]
+                    if bases in pos_ops[operation].keys():
+                        bases_operations = pos_ops[operation][bases]
 
                 elif len(msg) == 4:  # that means that i actually wrote a message
                     le = 'Length: ' + str(my_seq.len())
                     operation = msg[3].split('=')[1]
-                    bases = msg[2].split('=')[1]
-                    if bases in pos_ops[operation]["base=" + bases]:
-                        bases_operations = pos_ops[operation]["base=" + bases]
+                    bases = msg[2]
+                    if bases in pos_ops[operation].keys():
+                        bases_operations = pos_ops[operation][bases]
 
                 fs = open('response.html', 'w')
                 data = """<!DOCTYPE html>
@@ -66,12 +67,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 </head>
 <body style="background-color: yellow;">
     <h1>RESULTS:</h1>
-    <p>msg</p>
+    <p>{}</p>
+    <p>len</p>
+    <p>op</p>
     <a href="/">[Main Page]</a>
 
 </body>
-</html>""".format(my_seq.strbases.upper(), le, bases_operations)
+</html>"""
+                print(bases_operations)
+                data = data.replace("{}", my_seq.strbases.upper()).replace("len", le).replace("op", bases_operations)
                 fs.write(data)
+                fs.close()
                 with open('response.html', 'r') as f:
                     contents = f.read()
             else:
