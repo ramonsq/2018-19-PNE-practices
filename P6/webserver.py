@@ -24,6 +24,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             resp = 200
             msg = path.split('&')
             my_seq = msg[0].split('=')[1]
+            my_seq = my_seq.upper()
             if my_seq.upper().strip('ACGT') == '':
                 my_seq = Seq(my_seq)
 
