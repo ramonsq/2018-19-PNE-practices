@@ -11,7 +11,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print("Socket created")
 
 PORT = 8080
-IP = "192.168.1.138"
+IP = "212.128.253.79"
 
 s0 = input("My sequence:")
 

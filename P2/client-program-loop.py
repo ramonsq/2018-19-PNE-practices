@@ -5,8 +5,8 @@ from Seq import Seq
 
 print("Socket created")
 
-PORT = 8080
-IP = "192.168.1.138"
+PORT = 8089
+IP = "212.128.253.79"
 
 # Connect to the server
 

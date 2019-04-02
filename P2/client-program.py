@@ -11,7 +11,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print("Socket created")
 
 PORT = 8089
-IP = "212.128.253.80"
+IP = "212.128.253.79"
 
 s0 = input("My sequence:")
 s1 = Seq(s0).complement().strbases

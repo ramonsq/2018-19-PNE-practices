@@ -3,7 +3,7 @@ import socketserver
 import termcolor
 from Seq import Seq
 
-PORT = 8002
+PORT = 8006
 
 
 class TestHandler(http.server.BaseHTTPRequestHandler):

@@ -3,14 +3,14 @@ import socket
 # SERVER IP, PORT
 
 PORT = 7005
-IP = "212.128.253.87"
+IP = "212.128.253.79"
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # establish the connection to the Server (IP, PORT)
 s.connect((IP, PORT))
 
-msg = "ACTGATCAT\nlen\ncofghjmplement"
+msg = "ACTGATCAT\nlen\ncomplement"
 if msg == "":
     msg = "asdf"
 

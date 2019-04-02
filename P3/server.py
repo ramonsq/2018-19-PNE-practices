@@ -2,7 +2,7 @@ import socket
 from Seq import Seq
 
 PORT = 7005
-IP = "212.128.253.87"
+IP = "212.128.253.79"
 MAX_OPEN_REQUEST = 5671
 
 

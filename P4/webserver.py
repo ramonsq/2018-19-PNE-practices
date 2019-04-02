@@ -2,7 +2,7 @@ import socket
 import termcolor
 
 # Change this IP to yours!!!!!
-IP = "212.128.253.90"
+IP = "212.128.253.79"
 PORT = 8089
 MAX_OPEN_REQUESTS = 57
 
